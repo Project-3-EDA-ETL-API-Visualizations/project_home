@@ -1,8 +1,6 @@
 
-from flask import Flask
-from pprint import pprint
-import pandas as pd
-import flask
+from flask import Flask, jsonify, render_template
+import sqlalchemy as sql
 #IF YOU WANT TO USE SQL POSTGRES YOU CAN USE THIS CODE TO CONNECT TO SERVER
 # from sqlalchemy.ext.automap import automap_base
 # from sqlalchemy.orm import Session
@@ -36,7 +34,7 @@ def home():
 @app.route("/about")
 def about():
     print("Server received request for 'About' page...")
-    return flask.render_template('index.html')
+    return render_template('index.html')
 
 
 if __name__ == "__main__":
