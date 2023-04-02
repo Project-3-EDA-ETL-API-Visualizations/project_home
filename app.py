@@ -3,6 +3,7 @@ from flask import Flask
 from pprint import pprint
 import pandas as pd
 import flask
+
 #IF YOU WANT TO USE SQL POSTGRES YOU CAN USE THIS CODE TO CONNECT TO SERVER
 # from sqlalchemy.ext.automap import automap_base
 # from sqlalchemy.orm import Session
@@ -16,20 +17,25 @@ import flask
 
 ########################
 #IF YOU WANT TO USE MongoDB USE THIS CODE
-# Import dependencies
+#Import dependencies
 # from pymongo import MongoClient
 #  # Create an instance of MongoClient
 # mongo = MongoClient(port=27017)
 
-app = Flask(__name__)
+##https://wonder.cdc.gov/mcd-icd10-provisional.html
+##https://wonder.cdc.gov/nndss-annual-summary.html
+##https://wonder.cdc.gov/controller/datarequest/D157;jsessionid=E78A21844EF96E56C2C9990D9F8F
 
+
+app = Flask(__name__)
+death_causes = pd.read_csv('death rates (2).txt', delimiter="\t")
 
 
 # 3. Define what to do when a user hits the index route
 @app.route("/")
 def home():
     print("Server received request for 'Home' page...")
-    return "Welcome to my 'Home' page!"
+    return death_causes.to_json(orient='records')
 
 
 # 4. Define what to do when a user hits the /about route
@@ -41,4 +47,7 @@ def about():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
 

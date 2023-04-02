@@ -1,0 +1,7 @@
+import pyproj
+
+for record in fips_shapefile.records():
+    fips_code = record[0]
+    x, y = fips_shapefile.shape(record.shapeIndex).points[0]
+    longitude, latitude = pyproj.transform(pyproj.Proj(init='epsg:4269'), pyproj.Proj(init='epsg:4326'), x, y)
+    print(f"FIPS code {fips_code} is located at ({latitude}, {longitude})")
