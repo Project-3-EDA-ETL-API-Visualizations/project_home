@@ -27,27 +27,54 @@ import json
 
 app = Flask(__name__)
 
+alltables=create_engine("sqlite:///data/all_tables.db")
+
 
 
 # 3. Define what to do when a user hits the index route
-@app.route("/")
-def home():
-    print("Server received request for 'Home' page...")
-    return mdf.to_json()
+# @app.route("/")
+# def home():
+#     print("Server received request for 'Home' page...")
+#     return mdf.to_json()
 
 
+# # 4. Define what to do when a user hits the /about route
+# @app.route("/about")
+# def about():
+#     print("Server received request for 'About' page...")
+#     return render_template('index.html')
+
+@app.route("/api/missions")
+def mission():
+    connection=alltables.connect()
+    missions=pd.read_sql('select * from missions_data', con=connection)
+    connection.close()
+    return missions.to_json(orient="records")
+
+@app.route("/api/estancias")
+def estancias():
+    connection=alltables.connect()
+    estancias=pd.read_sql('select * from estancias_data', con=connection)
+    connection.close()
+    return estancias.to_json(orient="records")
+
+@app.route("/api/asistencias")
+def asistencias():
+    connection=alltables.connect()
+    asistencias=pd.read_sql('select * from asistencias_data', con=connection)
+    connection.close()
+    return asistencias.to_json(orient="records")
+    
 # 4. Define what to do when a user hits the /about route
 @app.route("/about")
 def about():
     print("Server received request for 'About' page...")
     return render_template('index.html')
 
-@app.route("/api/missions")
-def mission():
-    engine=create_engine('sqlite:///data/missions_data.sqlite')
-    mdf = pd.read_sql('select * from missions_df', engine)
-    print("Server received request for 'About' page...")
-    return mdf.to_json(orient="records")
+# engine=create_engine('sqlite:///data/missions_data.sqlite')
+    # mdf = pd.read_sql('select * from missions_df', engine)
+    # print("Server received request for 'About' page...")
+    # return mdf.to_json(orient="records")
 
 @app.route("/api/geojson/federal")
 def federal():
@@ -63,12 +90,12 @@ def historical():
         data = json.load(f)
     return data
 
-@app.route("/api/estancias")
-def estancias():
-    engine=create_engine('sqlite:///data/estancias_data.sqlite')
-    edf = pd.read_sql('select * from estancias_df', engine)
-    print("inside estancias")
-    return edf.to_json(orient = "records")
+# @app.route("/api/estancias")
+# def estancias():
+#     engine=create_engine('sqlite:///data/estancias_data.sqlite')
+#     edf = pd.read_sql('select * from estancias_df', engine)
+#     print("inside estancias")
+#     return edf.to_json(orient = "records")
 
 if __name__ == "__main__":
     app.run(debug=True)
