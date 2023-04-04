@@ -34,7 +34,7 @@ d3.json("/api/missions").then(function(response){
 // create the createMissions function 
 function createMissions(mission){
 var overlayMaps={'Mission':mission};
-L.control.layers(overlayMaps).addTo(myMap)};
+L.control.layers(null,overlayMaps).addTo(myMap)};
 
 // use d3.json to bring in estancias data
 d3.json("/api/estancias").then(function(response){
@@ -69,7 +69,7 @@ d3.json("/api/estancias").then(function(response){
 // create the createMissions1 function
 function createMissions1(mission){
     var overlayMaps={'Estancias':mission};
-    L.control.layers(overlayMaps).addTo(myMap)
+    L.control.layers(null,overlayMaps).addTo(myMap)
 };
 
 // use d3.json to bring in asistencias data
@@ -106,79 +106,81 @@ d3.json("/api/asistencias").then(function(response){
 // create the createMissions2 function
 function createMissions2(mission){
     var overlayMaps={'Asistencias':mission};
-    L.control.layers(overlayMaps).addTo(myMap)
+    L.control.layers(null,overlayMaps).addTo(myMap)
 };
 
 ///////// DAVIDS CODE FOR GEOJSON OF FEDERAL AND HISTORICAL MAPS////////
 
-// d3.json("/api/geojson/federal")
-// 	.then(fdata => {
-// 		console.log(fdata)
-// 		L.geoJson(fdata, {
-// 			style: function () {
-// 				return { color: "brown" }
-// 			}
-// 		}).addTo(myMap)
-// 	});
-//     var geojson;
-// 	d3.json("/api/geojson/historical")
-// 		.then(hdata => {
-// 			console.log(hdata)
-// 			geojson = L.geoJson(hdata, {
-// 				style: function () {
-// 					return { color: "red" };
-// 				}, onEachFeature: onEachFeature
-// 			}).addTo(myMap)
+d3.json("/api/geojson/federal")
+	.then(function(fdata) {
+		console.log(fdata)
+		L.geoJson(fdata, {
+			style: function () {
+				return { color: "brown" }
+			}, onEachFeature:function(feature,layer){
+                layer.bindPopup(`<h2>${layer.feature.properties.TRIBE_NAME}</h2>`)
+            }
+		}).addTo(myMap)
+	});
+    var geojson;
+	d3.json("/api/geojson/historical")
+		.then(function(hdata) {
+			console.log(hdata)
+			geojson = L.geoJson(hdata, {
+				style: function () {
+					return { color: "white" };
+				}, onEachFeature: onEachFeature
+			}).addTo(myMap)
+});
 
-// 		})
-// 	function onEachFeature(feature, layer) {
-// 		layer.on({
-// 			mouseover: highlightFeature,
-// 			mouseout: resetHighlight,
-// 			click: zoomToFeature
-// 		})
-// 	}
-// 	//highlight feature
-// 	function highlightFeature(e) {
-// 		var layer = e.target;
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		})
+	}
+	//highlight feature
+	function highlightFeature(e) {
+		var layer = e.target;
 
-// 		layer.setStyle({
-// 			weight: 5,
-// 			color: '#666',
-// 			dashArray: '',
-// 			fillOpacity: 0.7
+		layer.setStyle({
+			weight: 5,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
 
-// 		});
-// 		layer.bringToFront();
-// 		info.update(layer.feature.properties);
-// 	}
-// 	var info = L.control();
+		});
+		layer.bringToFront();
+		info.update(layer.feature.properties);
+	}
+	var info = L.control();
 
-// 	info.onAdd = function (map) {
-// 		this._div = L.DomUtil.create('div', 'info');
-// 		this.update();
-// 		return this._div;
-// 	};
-// 	info.update = function (props) {
-// 		console.log("P", props)
-// 		var panel = props ? `
-// 			<div class="panel">
-// 				<div class="panel-header">TRIBE INFORMATION</div>
-// 				<div class="panel-body">
-// 					<p>Name: ${props.TRIBE_NAME}</p>
-// 				</div>
-// 			</div>` : "Hover over state"
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
+	info.update = function (props) {
+		console.log("P", props)
+		var panel = props ? `
+			<div class="panel">
+				<div class="panel-header">TRIBE INFORMATION</div>
+				<div class="panel-body">
+					<p>Name: ${props.TRIBE_NAME}</p>
+				</div>
+			</div>` : "Hover over state"
 
-// 		this._div.innerHTML = panel;
-// 	}
-// 	info.addTo(myMap)
-// 	//resetToFeature
-// 	function resetHighlight(e) {
-// 		geojson.resetStyle(e.target);
-// 		info.update()
-// 	}
-// 	// zoom to feature
-// 	function zoomToFeature(e) {
-// 		myMap.fitBounds(e.target.getBounds());
+		this._div.innerHTML = panel;
+	}
+	info.addTo(myMap)
+	//resetToFeature
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+		info.update()
+	}
+	// zoom to feature
+	function zoomToFeature(e) {
+		myMap.fitBounds(e.target.getBounds());
 
-// 	}
+	}
