@@ -1,3 +1,5 @@
+var overlayMaps={};
+var layerControl;
 //  create the map object with options 
 var myMap=L.map('map',{
     center:[34.0522, -118.2437],
@@ -28,13 +30,8 @@ d3.json("/api/missions").then(function(response){
         array.push(markerC);
         }
         // call of createMissions function
-        createMissions(L.layerGroup(array))
+        createMissions2("Missions",L.layerGroup(array))
 })
-
-// create the createMissions function 
-function createMissions(mission){
-var overlayMaps={'Mission':mission};
-L.control.layers(null,overlayMaps).addTo(myMap)};
 
 // use d3.json to bring in estancias data
 d3.json("/api/estancias").then(function(response){
@@ -64,13 +61,8 @@ d3.json("/api/estancias").then(function(response){
     array.push(markerC);
     }
     // call on createMissions1 function
-    createMissions1(L.layerGroup(array))
+    createMissions2("Estancias: A subgroup of the parent mission where they farmed and raised livestock.",L.layerGroup(array))
 })
-// create the createMissions1 function
-function createMissions1(mission){
-    var overlayMaps={'Estancias':mission};
-    L.control.layers(null,overlayMaps).addTo(myMap)
-};
 
 // use d3.json to bring in asistencias data
 d3.json("/api/asistencias").then(function(response){
@@ -98,39 +90,51 @@ d3.json("/api/asistencias").then(function(response){
         }).bindPopup(`<h2>${response[i]['name']}</h2>`);
         // pudh markerC to empty array
         array.push(markerC);
-    }
-        // call thr createMissions2 function
-        createMissions2(L.layerGroup(array))
+    } 
+        // call the createMissions2 function
+        createMissions2("Asistencias: Branch missions where priests practiced closer to the native population.",L.layerGroup(array))
 });
  
 // create the createMissions2 function
-function createMissions2(mission){
-    var overlayMaps={'Asistencias':mission};
-    L.control.layers(null,overlayMaps).addTo(myMap)
+function createMissions2(name,layerGroup){
+    if (layerControl!=null){
+        layerControl.addOverlay(layerGroup, name);
+    } else {
+    // var overlayMaps={};
+        overlayMaps[name]=layerGroup
+        layerControl=L.control.layers(null,overlayMaps).addTo(myMap)
+    }
 };
 
-///////// DAVIDS CODE FOR GEOJSON OF FEDERAL AND HISTORICAL MAPS////////
+///////// CODE FOR GEOJSON OF FEDERAL AND HISTORICAL MAPS////////
 
 d3.json("/api/geojson/federal")
-	.then(function(fdata) {
-		console.log(fdata)
-		L.geoJson(fdata, {
-			style: function () {
-				return { color: "brown" }
-			}, onEachFeature:function(feature,layer){
-                layer.bindPopup(`<h2>${layer.feature.properties.TRIBE_NAME}</h2>`)
-            }
-		}).addTo(myMap)
-	});
+ 	.then(function(fdata) {
+ 		console.log(fdata)
+        var array=[]
+ 		var fed=L.geoJson(fdata, {
+ 			style: function () {
+ 				return { color: "brown" }
+ 			}, onEachFeature:function(feature,layer){
+                 layer.bindPopup(`<h2>${layer.feature.properties.Name}</h2>`)
+             }
+ 		})
+        array.push(fed)
+        createMissions2("Federal: Native American land recognized by the federal government as of 2023",L.layerGroup(array))
+ 	});
     var geojson;
-	d3.json("/api/geojson/historical")
+d3.json("/api/geojson/historical")
 		.then(function(hdata) {
 			console.log(hdata)
-			geojson = L.geoJson(hdata, {
+            var array=[]
+			var hist=geojson = L.geoJson(hdata, {
 				style: function () {
 					return { color: "white" };
 				}, onEachFeature: onEachFeature
-			}).addTo(myMap)
+			})
+            array.push(hist)
+            createMissions2("Historical: Native American land recognized in the 1700s",L.layerGroup(array))  
+
 });
 
 	function onEachFeature(feature, layer) {
@@ -162,14 +166,14 @@ d3.json("/api/geojson/federal")
 		return this._div;
 	};
 	info.update = function (props) {
-		console.log("P", props)
+		// console.log("P", props)
 		var panel = props ? `
 			<div class="panel">
 				<div class="panel-header">TRIBE INFORMATION</div>
 				<div class="panel-body">
 					<p>Name: ${props.TRIBE_NAME}</p>
 				</div>
-			</div>` : "Hover over state"
+			</div>` : "Select the Historical layer, then hover over state"
 
 		this._div.innerHTML = panel;
 	}
