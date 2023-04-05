@@ -2,7 +2,7 @@ var overlayMaps={};
 var layerControl;
 //  create the map object with options 
 var myMap=L.map('map',{
-    center:[34.0522, -118.2437],
+    center:[37.1661, -119.4494],
     zoom: 6,
 
 });
