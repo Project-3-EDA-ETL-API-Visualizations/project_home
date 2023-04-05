@@ -1,0 +1,19 @@
+html,
+body,
+#map {
+  width: 520px;
+  height: 100%;
+  padding: 50px;
+  margin: 40px 100px 120px 80px;
+}
+#myChart {
+  height: 200%;
+  padding: 0;
+  margin: 0;
+}
+
+.info.leaflet-control {
+  background-color: white;
+  height: 100px;
+  width: 150px;
+}
