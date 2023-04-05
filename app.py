@@ -57,6 +57,11 @@ def about():
     print("Server received request for 'About' page...")
     return render_template('index.html')
 
+@app.route("/home")
+def home():
+    print("Server received request for 'Home' page...")
+    return render_template('index2.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
 
