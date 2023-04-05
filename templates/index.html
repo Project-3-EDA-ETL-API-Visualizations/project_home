@@ -5,8 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+     <!-- D3 -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- Leaflet JavaScript code -->
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+  
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+  
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+ 
 </head>
 <body>
-    <h1>"Welcome Project 3</h1>
+    <h1>Native American Territory Changes Over Time </h1>
+    <img src="https://www.foundsf.org/images/d/de/Indians-dancing-at-Mission-HN000275a.jpg" alt="Indians dancing at mission" width="1000" height="600">
+    <h2>Overview</h2>
+    <body>Part of Spanish colonization happened in Alta California. The Spanish established missions that were meant to convert Native Americans to Christianity, but they were also used as labor camps for colonizers. The missions were authorized to be under Spanish control for only ten years, but the padres (priests) did not follow this rule and kept control over the land and wealth that belonged to the Native Americans. Epidemic diseases like smallpox, syphilis, and measles that the Native Americans had no immunity to were introduced by the colonizers, causing widespread suffering and death among the Native American population. The missionaries forcibly separated Indian children from their parents and housed them in unsanitary barracks, which made them more vulnerable to diseases. The Native Americans struggled to understand and cope with the devastating effects of these diseases and the missionaries' attempts to convert them to Christianity.</body>
+    <h2>Native Resistance</h2>
+    <body>The Native Americans who lived in California during the time of the missions were forced to work hard and were separated from their families. They tried to resist the missionaries by secretly practicing their old religious traditions and running away. Some even assassinated the missionaries. There were also armed uprisings against the missionaries, and many Native Americans died from disease and mistreatment. Despite all of this, some tribes were able to maintain their cultural identity and traditions. Eventually, the Mexican government ended the mission system, but many Native Americans had already died as a result.</body>
+    <h2>Collapse of the Mission System</h2>
+    <body>The collapse of the mission system in California in the 1800s caused many problems for Native American tribes. The government gave away land that belonged to tribes, and demanded that the missionaries release the Indians from their control. However, this was not done with good intentions, as many ranchers wanted the land for themselves. When the Indians were freed, they struggled to rebuild their communities on new, unfamiliar land that had been damaged by the introduction of new animals. This led to the formation of guerrilla Indian bands, who fought against the Mexican government and ranchers. The Mexican government gave away even more land, but this only made things worse as the Indians became more successful in stealing livestock. Epidemics also devastated the Indian population, causing a decline from 310,000 to 150,000 in just 77 years. The survivors suffered greatly from the loss of their loved ones, and things were about to get even worse for them.
+
+      Alta California was not managed well by Mexico, and the arrival of the United States military in 1846 led to aggressive attacks by Native American tribes. The U.S. Army under John C. Fremont attacked Sacramento River Maidu Indian villages, but many Native Americans aided the Americans. After Mexico surrendered, military governors administered Indian affairs and tried to stop stock raiding by imposing strict rules on Native Americans.
+      </body>
+    <h2>Important Policies</h2>
+    <h3>The Indian Removal Act of 1830</h3>
+    <body>In 1830, President Andrew Jackson made a law called the Indian Removal Act. The law allowed the government to give land to Native American tribes in the West in exchange for their land in states where they already lived. Some tribes left without fighting, but others didn't want to move. In 1838 and 1839, the Cherokees were forced to move west by the government. This was a long and terrible journey known as the "Trail of Tears." Around 4,000 Cherokees died during this trip.</body>
+    <h3>The General Allotment Act of 1887 (Dawes Act)</h3>
+    <body>The law was passed by Congress on February 8, 1887. It allowed the President to divide up reservation land into small pieces and give them to individual Native Americans. This was supposed to protect their property rights, but many ended up with desert land that they couldn't farm. The techniques of farming were also different from their tribal way of life. Young children sometimes inherited land they couldn't farm, and sometimes multiple people inherited small pieces that were too small for farming. Tribes were often underpaid for the land, and some non-Native people bought the land when Native people couldn't keep up with government requirements.</body>
+    <!-- The div that holds our map -->
+  <div id="map"></div>
+
+       <!-- Our JavaScript file -->
+       <!-- <script type="text/javascript" src="static/js/logic.js"></script> -->
+       <script src="{{ url_for('static', filename='js/logic.js')}}"></script>
+ 
 </body>
 </html>
