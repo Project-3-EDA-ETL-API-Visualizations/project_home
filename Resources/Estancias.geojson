@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "Estancias",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "San Marcos Estancia", "Source": "Wikipedia article" }, "geometry": { "type": "Point", "coordinates": [ -119.877777777777993, 34.547222222222203, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "San Francisco Xavier Estancia", "Source": "Wikipedia article" }, "geometry": { "type": "Point", "coordinates": [ -118.605277777777999, 34.432777777777801, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "San Bernardino de Sena Estancia", "Source": "Wikipedia article" }, "geometry": { "type": "Point", "coordinates": [ -117.220833333333005, 34.044444444444402, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Santa Ana Estancia", "Source": "Wikipedia article" }, "geometry": { "type": "Point", "coordinates": [ -117.936944444443995, 33.6730555555555, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Las Flores Estancia", "Source": "Wikipedia article" }, "geometry": { "type": "Point", "coordinates": [ -117.460833333332999, 33.299722222222201, 0.0 ] } }
+]
+}
