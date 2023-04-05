@@ -20,7 +20,10 @@
   
     <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
- 
+
+    <!-- Chart.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+
 </head>
 <body>
     <h1>Native American Territory Changes Over Time </h1>
@@ -60,10 +63,14 @@
     <a href="https://www.archives.gov/milestone-documents/dawes-act#:~:text=Also%20known%20as%20the%20General,granted%20allotments%20of%20reservation%20land. ">Dawes Act</a>
     <!-- The div that holds our map -->
   <div id="map"></div>
-
+ 
        <!-- Our JavaScript file -->
        <!-- <script type="text/javascript" src="static/js/logic.js"></script> -->
-       <script src="{{ url_for('static', filename='js/logic.js')}}"></script>
- 
+       <script src="{{ url_for('static', filename='js/logic3.js')}}"></script>
+
+  <div>
+      <canvas id="myChart" ></canvas>
+    </div>
+    <script src="static/js/myChart.js"></script>
 </body>
 </html>
