@@ -4,8 +4,15 @@ body,
   width: 520px;
   height: 100%;
   padding: 50px;
-  margin: 40px 100px 120px 80px;
+  margin: 40px 100px 20px 80px;
 }
+
+#note{  font-size: 20px;
+  margin: 20px 5px 20px 80px;
+  font-style  : italic;
+  font-weight : bold;
+  color: orangered;}
+
 #myChart {
   height: 200%;
   padding: 0;
@@ -17,3 +24,4 @@ body,
   height: 100px;
   width: 150px;
 }
+
