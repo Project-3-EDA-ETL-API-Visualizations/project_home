@@ -1,7 +1,7 @@
 const myChart = {
 	labels: ['Historical Land Area', 'Federal Land Area'],
 	datasets: [{
-	  label: 'Area Change (scaled down)',
+	  label: 'Area Change (divided by 1 million)',
 	  data: [409888280793.65576/1000000000, 4208629635.777346/1000000000],
 	  backgroundColor: [
 		'rgba(0, 100, 0, 1)',
