@@ -4,8 +4,20 @@ body,
   width: 520px;
   height: 100%;
   padding: 50px;
+<<<<<<< HEAD
+  margin: 40px 100px 20px 80px;
+}
+
+#note{  font-size: 20px;
+  margin: 20px 5px 20px 80px;
+  font-style  : italic;
+  font-weight : bold;
+  color: orangered;}
+
+=======
   margin: 40px 100px 120px 80px;
 }
+>>>>>>> main
 #myChart {
   height: 200%;
   padding: 0;
@@ -16,4 +28,9 @@ body,
   background-color: white;
   height: 100px;
   width: 150px;
+<<<<<<< HEAD
 }
+
+=======
+}
+>>>>>>> main
